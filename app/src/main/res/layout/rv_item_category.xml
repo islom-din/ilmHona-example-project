@@ -1,0 +1,28 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ButtonCLick"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/rvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_click_active_design"
+        android:gravity="center"
+        android:layout_marginHorizontal="8dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/color_text_categoryfilter_selected"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Напитки" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
