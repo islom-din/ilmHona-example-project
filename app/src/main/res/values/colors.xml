@@ -13,6 +13,10 @@
     <color name="titleColor">#787878</color>
     <color name="orange">#ff9900</color>
 
+    <color name="white_100">#DEDDDD</color>
+    <color name="white_500">#FFD2B3</color>
+    <color name="red_500_text">#D55700</color>
+
     <color name="color_categoryfilter_selected">#FFF0E6</color>
     <color name="color_text_categoryfilter_selected">#D15700</color>
     <color name="color_categoryfilter_non">#F3F3F7</color>

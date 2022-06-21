@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="6dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:scrollbars="vertical">
+
+
+        <ImageView
+            android:id="@+id/image_food"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/pizza_time" />
+
+        <TextView
+            android:id="@+id/name_food"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="7dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:singleLine="false"
+            android:text="@string/name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/description_food"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/description_food"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/description_food"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="7dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:singleLine="false"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@+id/price_food"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/price_food"
+            app:layout_constraintTop_toBottomOf="@+id/name_food" />
+
+        <TextView
+            android:id="@+id/price_food"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="117dp"
+            android:layout_marginBottom="39dp"
+            android:background="@drawable/round_text"
+            android:gravity="center"
+            android:text="75 TJS"
+            android:textColor="@color/red_500_text"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_food"
+            app:layout_constraintTop_toBottomOf="@+id/description_food" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

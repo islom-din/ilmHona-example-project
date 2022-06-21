@@ -1,15 +1,17 @@
 package islom.din.pizzaapplication
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson2.FoodCategory
 import com.example.lesson2.FoodCategoryAdapter
+import com.example.recyclerview_itemclick.DataSource
+import com.example.recyclerview_itemclick.FoodAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity() {
@@ -23,8 +25,8 @@ class MainActivity : AppCompatActivity() {
     private var address1: TextView? = null
     private var address2: TextView? = null
 
-    private lateinit var recyclerViewHorizontal: RecyclerView
-
+    private lateinit var categories: RecyclerView
+    private lateinit var foods: RecyclerView
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,20 +59,53 @@ class MainActivity : AppCompatActivity() {
             chooseCityBottomSheet?.show()
         }
 
-        recyclerViewHorizontal = findViewById(R.id.categories_list)
+        // !!!
+        setupCategoriesList()
+        setupFoodList(1)
+    }
+
+    private fun setupCategoriesList() {
+        categories = findViewById(R.id.categories_list)
         val listB = getCategory()
         val adapter2 = FoodCategoryAdapter()
         adapter2.submitList(listB)
         adapter2.onItemClick = { id ->
 
-            for (item in listB){
-                item.isSelected = item.id == id
+            for (item in listB) {
+                if(item.id == id) {
+                    item.isSelected = true
+                } else {
+                    item.isSelected = false
+                }
+//                item.isSelected = item.id == id
             }
 
             adapter2.submitList(listB)
             updateFoodList(id)
+            setupFoodList(id)
         }
-        recyclerViewHorizontal.adapter = adapter2
+        categories.adapter = adapter2
+    }
+
+    private fun setupFoodList(categoryId: Int) {
+        //1) Найти список
+        val data = DataSource()
+        data.category = categoryId
+        foods = findViewById(R.id.foods_list_rv)
+        val myList = data.getList()
+        val adapter = FoodAdapter(myList)
+        foods.adapter = adapter
+
+        adapter.setOnItemClickListener(object: FoodAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@MainActivity, ItemActivity::class.java)
+                intent.putExtra("NAME", myList[position].name)
+                intent.putExtra("DESCRIPTION", myList[position].description)
+                intent.putExtra("PRICE", myList[position].price)
+                intent.putExtra("IMAGE", myList[position].imageId)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun setupCityBottomSheet() {
@@ -130,8 +165,8 @@ class MainActivity : AppCompatActivity() {
             FoodCategory(3, listB[2], false),
             FoodCategory(4, listB[3], false),
             FoodCategory(5, listB[4], false),
-            FoodCategory(6, listB[5], false),
-            FoodCategory(7, listB[6], false)
+//            FoodCategory(6, listB[5], false),
+//            FoodCategory(7, listB[6], false)
 
         )
         return categoryList

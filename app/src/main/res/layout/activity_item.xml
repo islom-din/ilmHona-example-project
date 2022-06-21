@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="6dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/pizzaImage"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:padding="6dp"
+            android:src="@drawable/pizza_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pizzaImage"
+            tools:text="Pizza name" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/price"
+            app:layout_constraintStart_toStartOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintVertical_bias="0.055"
+            tools:text="Средняя 30 см" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/round_button"
+            android:gravity="center"
+            android:text="@string/_75_tjs"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pizzaImage"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="359dp"
+            android:background="@drawable/round_back_button"
+            android:src="@drawable/icon_arrow_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.562"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

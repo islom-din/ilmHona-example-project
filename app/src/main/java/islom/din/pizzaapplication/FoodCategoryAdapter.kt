@@ -20,7 +20,7 @@ class FoodCategoryAdapter : RecyclerView.Adapter<FoodCategoryAdapter.ButtonViewH
 
     fun submitList(newList: List<FoodCategory>) {
         listButton = newList
-        notifyDataSetChanged()
+        notifyDataSetChanged() // это тяжело
     }
 
     /* --------------------------------------------

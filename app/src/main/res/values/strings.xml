@@ -3,4 +3,8 @@
 
     <string name="address1">Выбрать адрес доставки</string>
     <string name="address2">  Душанбе, Проспект Айни, 29/9</string>
+    <string name="name">name</string>
+    <string name="description">description</string>
+    <string name="price">price</string>
+    <string name="_75_tjs">В КОРЗИНУ ЗА 75 TJS</string>
 </resources>
