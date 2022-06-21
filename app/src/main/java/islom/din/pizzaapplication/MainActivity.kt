@@ -13,17 +13,15 @@ import com.example.lesson2.FoodCategoryAdapter
 import com.example.recyclerview_itemclick.DataSource
 import com.example.recyclerview_itemclick.FoodAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import islom.din.pizzaapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
     private var chooseCityBottomSheet: BottomSheetDialog? = null
     private var aboutBannerBottomSheet: BottomSheetDialog? = null
-
-    private var cityNameTextView: TextView? = null
-    private var text1: TextView? = null
-    private var text2: TextView? = null
-    private var address1: TextView? = null
-    private var address2: TextView? = null
 
     private lateinit var categories: RecyclerView
     private lateinit var foods: RecyclerView
@@ -31,37 +29,39 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
         setupCityBottomSheet()
         setupBannerBottomSheet()
 
-        text1 = findViewById(R.id.text1)
-        text2 = findViewById(R.id.text2)
-        address1 = findViewById(R.id.address1)
-        address2 = findViewById(R.id.address2)
-        cityNameTextView = findViewById(R.id.city_name)
-        cityNameTextView?.text = "Душанбе"
 
-        text1?.setOnClickListener {
-            text2?.setBackgroundResource(R.color.darkGray)
-            address2?.visibility = View.INVISIBLE
-            address1?.visibility = View.VISIBLE
-            text1?.setBackgroundResource(R.drawable.button_shape)
+        binding.cityName.text = "Душанбе"
+
+        binding.text1.setOnClickListener {
+            binding.text2.setBackgroundResource(R.color.darkGray)
+            binding.address2.visibility = View.INVISIBLE
+            binding.address1.visibility = View.VISIBLE
+            binding.text1.setBackgroundResource(R.drawable.button_shape)
         }
-        text2?.setOnClickListener {
-            text2?.setBackgroundResource(R.drawable.button_shape)
-            text1?.setBackgroundResource(R.color.darkGray)
-            address1?.visibility = View.INVISIBLE
-            address2?.visibility = View.VISIBLE
+        binding.text2.setOnClickListener {
+            binding.text2.setBackgroundResource(R.drawable.button_shape)
+            binding.text1.setBackgroundResource(R.color.darkGray)
+            binding.address1.visibility = View.INVISIBLE
+            binding.address2.visibility = View.VISIBLE
         }
 
-        cityNameTextView?.setOnClickListener {
+        binding.cityName.setOnClickListener {
             chooseCityBottomSheet?.show()
         }
 
         // !!!
         setupCategoriesList()
         setupFoodList(1)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun setupCategoriesList() {
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             val result = textInBottomSheet.text.toString() // это обработчик нажатия на
             // на элемент в bottomSheet
 
-            cityNameTextView?.text = result
+            binding.cityName.text = result
             chooseCityBottomSheet?.dismiss()// этот вызов скроет bottomSheet
         }
 
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             val result = text2InBottomSheet.text.toString() // это обработчик нажатия на
             // на элемент в bottomSheet
 
-            cityNameTextView?.text = result
+            binding.cityName.text = result
             chooseCityBottomSheet?.dismiss()// этот вызов скроет bottomSheet
         }
 
@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
             val result = text3InBottomSheet.text.toString() // это обработчик нажатия на
             // на элемент в bottomSheet
 
-            cityNameTextView?.text = result
+            binding.cityName.text = result
             chooseCityBottomSheet?.dismiss()// этот вызов скроет bottomSheet
         }
 
@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
             val result = text4InBottomSheet.text.toString() // это обработчик нажатия на
             // на элемент в bottomSheet
 
-            cityNameTextView?.text = result
+            binding.cityName.text = result
             chooseCityBottomSheet?.dismiss()// этот вызов скроет bottomSheet
         }
     }

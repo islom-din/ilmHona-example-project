@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import islom.din.pizzaapplication.Food
 import islom.din.pizzaapplication.R
+import islom.din.pizzaapplication.databinding.FoodItemBinding
 
 class FoodAdapter(private val dataList: List<Food>):
     RecyclerView.Adapter<FoodAdapter.FoodHolder>(){
@@ -32,21 +33,25 @@ class FoodAdapter(private val dataList: List<Food>):
 
     override fun onBindViewHolder(holder: FoodHolder, position: Int) {
         val item = dataList[position]
-        holder.image.setImageResource(item.imageId)
-        holder.name.text = dataList[position].name
-        holder.description.text = dataList[position].description
-        holder.price.text = "от ${item.price} TJS"
-
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int = dataList.size
 
     class FoodHolder(view: View, listener: onItemClickListener): RecyclerView.ViewHolder(view) {
+        private val binding = FoodItemBinding.bind(view)
 
-        val image: ImageView = view.findViewById(R.id.image_food)
-        val name: TextView = view.findViewById(R.id.name_food)
-        val description: TextView = view.findViewById(R.id.description_food)
-        val price: TextView = view.findViewById(R.id.price_food)
+        fun bind(food: Food) {
+            binding.imageFood.setImageResource(food.imageId)
+            binding.nameFood.text = food.name
+            binding.descriptionFood.text = food.description
+            binding.priceFood.text = "от ${food.price} TJS"
+        }
+
+//        val image: ImageView = view.findViewById(R.id.image_food)
+//        val name: TextView = view.findViewById(R.id.name_food)
+//        val description: TextView = view.findViewById(R.id.description_food)
+//        val price: TextView = view.findViewById(R.id.price_food)
 
         init {
             itemView.setOnClickListener {
