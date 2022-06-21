@@ -6,276 +6,283 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/city_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="2dp"
-                android:textColor="@color/titleColor"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableEndCompat="@drawable/icon_down"
-                tools:text="Душанбе" />
-
-        </androidx.appcompat.widget.Toolbar>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/cards_shape"
             android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/city_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="2dp"
+                    android:textColor="@color/titleColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:drawableEndCompat="@drawable/icon_down"
+                    tools:text="Душанбе" />
+
+            </androidx.appcompat.widget.Toolbar>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/main_background_of_button"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="3dp"
-                android:weightSum="100">
+                android:background="@drawable/cards_shape"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/text1"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="50"
-                    android:background="@drawable/button_shape"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/main_background_of_button"
                     android:gravity="center"
-                    android:text="На доставку"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:orientation="horizontal"
+                    android:padding="3dp"
+                    android:weightSum="100">
 
-                <TextView
-                    android:id="@+id/text2"
-                    android:layout_width="0dp"
-                    android:layout_height="25dp"
-                    android:layout_weight="50"
-                    android:gravity="center"
-                    android:text="В зале"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="50"
+                        android:background="@drawable/button_shape"
+                        android:gravity="center"
+                        android:text="На доставку"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_weight="50"
+                        android:gravity="center"
+                        android:text="В зале"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="16dp"
+                    android:background="@color/darkGray" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/address1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/icon_next_orange"
+                        android:gravity="center"
+                        android:text="@string/address1"
+                        android:textColor="@color/orange"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/address2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/icon_next"
+                        android:gravity="center"
+                        android:text="@string/address2"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="16dp"
-                android:background="@color/darkGray" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Toolbar1">
 
-                <TextView
-                    android:id="@+id/address1"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/icon_next_orange"
-                    android:gravity="center"
-                    android:text="@string/address1"
-                    android:textColor="@color/orange"
-                    android:textSize="16sp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="162dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/address2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/icon_next"
-                    android:gravity="center"
-                    android:text="@string/address2"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView1"
+                        android:layout_width="300dp"
+                        android:layout_height="130dp"
+                        android:layout_margin="16dp"
+                        android:backgroundTint="#FEF9F5"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="30dp"
+                                    android:layout_marginTop="25dp"
+                                    android:text="БЕСПЛАТНАЯ"
+                                    android:textColor="#F85900"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="30dp"
+                                    android:text="ДОСТАВКА"
+                                    android:textColor="#F85900"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="30dp"
+                                    android:text="ДОСТАВИМ ВАШ ЗАКАЗ ДО 60"
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="30dp"
+                                    android:text="МИНУТ ИЛИ ПИЦЦА БЕСПЛАТНО!"
+                                    android:textColor="@color/black"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:src="@drawable/pizza_pic" />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="300dp"
+                        android:layout_height="130dp"
+                        android:layout_margin="16dp"
+                        android:backgroundTint="#E76046"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:layout_marginTop="35dp"
+                                    android:text="Работать\nс нами"
+                                    android:textColor="@color/white"
+                                    android:textSize="25sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:src="@drawable/work_at_dodo" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categories_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginVertical="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/rv_item_category" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foods_list_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/food_item"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </LinearLayout>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Toolbar1">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="162dp"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView1"
-                    android:layout_width="300dp"
-                    android:layout_height="130dp"
-                    android:layout_margin="16dp"
-                    android:backgroundTint="#FEF9F5"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:layout_marginTop="25dp"
-                                android:text="БЕСПЛАТНАЯ"
-                                android:textColor="#F85900"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="ДОСТАВКА"
-                                android:textColor="#F85900"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="ДОСТАВИМ ВАШ ЗАКАЗ ДО 60"
-                                android:textColor="@color/black"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="30dp"
-                                android:text="МИНУТ ИЛИ ПИЦЦА БЕСПЛАТНО!"
-                                android:textColor="@color/black"
-                                android:textSize="10sp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:src="@drawable/pizza_pic" />
-
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
-                    android:layout_width="300dp"
-                    android:layout_height="130dp"
-                    android:layout_margin="16dp"
-                    android:backgroundTint="#E76046"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp">
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="35dp"
-                                android:text="Работать\nс нами"
-                                android:textColor="@color/white"
-                                android:textSize="25sp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:src="@drawable/work_at_dodo" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categories_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginVertical="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/rv_item_category" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/foods_list_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/food_item"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
