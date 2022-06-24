@@ -6,5 +6,7 @@ data class Food(
     val name: String,
     val description: String,
     val price: Int,
-    val category: Int
+    val category: Int,
+    val additionalComponents: List<Food>? = null//TODO: список всех элементов из которых состоит
+    // комбо
 )
