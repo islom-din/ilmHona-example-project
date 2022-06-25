@@ -3,31 +3,29 @@ package com.example.recyclerview_itemclick
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import islom.din.pizzaapplication.Food
 import islom.din.pizzaapplication.R
 import islom.din.pizzaapplication.databinding.FoodItemBinding
 
-class FoodAdapter(private val dataList: List<Food>):
+class FoodAdapter:
     RecyclerView.Adapter<FoodAdapter.FoodHolder>(){
 
-    private lateinit var mListener: onItemClickListener
+    var dataList: List<Food> = emptyList()
+    var onItemClick: ((Food) -> Unit)? = null
 
-    interface onItemClickListener {
-        fun onItemClick(position: Int)
-    }
-
-    fun setOnItemClickListener(listener: onItemClickListener) {
-        mListener = listener
+    fun submitList(newList: List<Food>) {
+        dataList = newList
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodHolder {
-        val adapterLayout: View = LayoutInflater.from(parent.context).inflate(
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val adapterLayout: View = layoutInflater.inflate(
             R.layout.food_item,
-            parent, false)
-        return FoodHolder(adapterLayout, mListener)
+            parent, false
+        )
+        return FoodHolder(adapterLayout)
     }
 
 
@@ -38,7 +36,7 @@ class FoodAdapter(private val dataList: List<Food>):
 
     override fun getItemCount(): Int = dataList.size
 
-    class FoodHolder(view: View, listener: onItemClickListener): RecyclerView.ViewHolder(view) {
+    inner class FoodHolder(view: View): RecyclerView.ViewHolder(view) {
         private val binding = FoodItemBinding.bind(view)
 
         fun bind(food: Food) {
@@ -48,14 +46,9 @@ class FoodAdapter(private val dataList: List<Food>):
             binding.priceFood.text = "от ${food.price} TJS"
         }
 
-//        val image: ImageView = view.findViewById(R.id.image_food)
-//        val name: TextView = view.findViewById(R.id.name_food)
-//        val description: TextView = view.findViewById(R.id.description_food)
-//        val price: TextView = view.findViewById(R.id.price_food)
-
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
+                onItemClick?.invoke(dataList[adapterPosition])
             }
         }
     }

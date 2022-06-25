@@ -1,10 +1,12 @@
 package islom.din.pizzaapplication
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import islom.din.pizzaapplication.R
+import java.lang.RuntimeException
 
 class ItemActivity : AppCompatActivity() {
 
@@ -20,10 +22,12 @@ class ItemActivity : AppCompatActivity() {
         val backButton: ImageView = findViewById(R.id.backButton)
 
         val bundle: Bundle? = intent.extras
-        val image = bundle!!.getInt("IMAGE")
+        val image = bundle?.getInt("IMAGE") ?: throw RuntimeException("Image required")
         val name = bundle.getString("NAME")
         val description = bundle.getString("DESCRIPTION")
         val price = bundle.getInt("PRICE")
+
+        //.....
 
         foodItem.setImageResource(image)
         nameItem.text = name

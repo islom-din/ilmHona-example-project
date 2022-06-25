@@ -5,11 +5,9 @@ import islom.din.pizzaapplication.R
 
 class DataSource {
 
-    var category: Int = 0
-
-    fun getList() :List<Food> {
+    fun getList(categoryId: Int): List<Food> {
         var listOfFood = listOf<Food>()
-        when(category) {
+        when(categoryId) {
             1 -> listOfFood = comboList()
             2 -> listOfFood = snackList()
             3 -> listOfFood = beveragesList()

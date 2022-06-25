@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson2.FoodCategoryAdapter
 import com.example.recyclerview_itemclick.DataSource
 import com.example.recyclerview_itemclick.FoodAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import islom.din.pizzaapplication.databinding.ActivityItemBinding
 import islom.din.pizzaapplication.databinding.ActivityMainBinding
 
 // VIEW
@@ -19,30 +21,35 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
+    private var _activityItemBinding: ActivityItemBinding? = null
+    private val activityItemBinding get() = _activityItemBinding
+
     // ViewModel для данной активити
-    private val viewModel = ViewModel()
+    private lateinit var viewModel: MainViewModel
 
     // RecyclerView для списка категорий
     private lateinit var categoriesList: RecyclerView
     private val categoriesAdapter = FoodCategoryAdapter()
-
-
+    private val foodAdapter = FoodAdapter()
     private var chooseCityBottomSheet: BottomSheetDialog? = null
     private var aboutBannerBottomSheet: BottomSheetDialog? = null
+//    private lateinit var foods: RecyclerView
 
-
-    private lateinit var foods: RecyclerView
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        binding.foodsListRv.adapter = foodAdapter
+
+
+
         setupListeners()
         setupCategoriesList()
-
-
-
+        setupFoodList(1)
 
 
 
@@ -70,7 +77,6 @@ class MainActivity : AppCompatActivity() {
             chooseCityBottomSheet?.show()
         }
 
-        setupFoodList(1)
     }
 
     override fun onDestroy() {
@@ -80,6 +86,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         categoriesAdapter.onItemClick = { refreshCategoriesList(it) }
+        foodAdapter.onItemClick = {
+            val intent = Intent(this@MainActivity, ItemActivity::class.java)
+            intent.putExtra("NAME", it.name)
+            intent.putExtra("DESCRIPTION", it.description)
+            intent.putExtra("PRICE", it.price)
+            intent.putExtra("IMAGE", it.imageId)
+            startActivity(intent)
+        }
     }
 
     private fun setupCategoriesList() {
@@ -96,34 +110,12 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.updateCategories(currentCategories)
         categoriesAdapter.submitList(currentCategories)
-        updateFoodList(selectedCategoryId)
         setupFoodList(selectedCategoryId)
     }
 
-
-
-
-
-
     private fun setupFoodList(categoryId: Int) {
-        //1) Найти список
-        val data = DataSource()
-        data.category = categoryId
-        foods = findViewById(R.id.foods_list_rv)
-        val myList = data.getList()
-        val adapter = FoodAdapter(myList)
-        foods.adapter = adapter
-
-        adapter.setOnItemClickListener(object : FoodAdapter.onItemClickListener {
-            override fun onItemClick(position: Int) {
-                val intent = Intent(this@MainActivity, ItemActivity::class.java)
-                intent.putExtra("NAME", myList[position].name)
-                intent.putExtra("DESCRIPTION", myList[position].description)
-                intent.putExtra("PRICE", myList[position].price)
-                intent.putExtra("IMAGE", myList[position].imageId)
-                startActivity(intent)
-            }
-        })
+        val foods = viewModel.getFoodById(categoryId)
+        foodAdapter.submitList(foods)
     }
 
     private fun setupCityBottomSheet() {
@@ -173,37 +165,5 @@ class MainActivity : AppCompatActivity() {
         cardView1?.setOnClickListener {
             aboutBannerBottomSheet?.show()
         }
-    }
-
-//    private fun getCategory(): MutableList<FoodCategory> {
-//        val listB = getButtonText()
-//        val categoryList: MutableList<FoodCategory> = mutableListOf(
-//            FoodCategory(1, listB[0], true),
-//            FoodCategory(2, listB[1], false),
-//            FoodCategory(3, listB[2], false),
-//            FoodCategory(4, listB[3], false),
-//            FoodCategory(5, listB[4], false),
-////            FoodCategory(6, listB[5], false),
-////            FoodCategory(7, listB[6], false)
-//
-//        )
-//        return categoryList
-//    }
-//
-//    private fun getButtonText(): ArrayList<String> {
-//        val listButtonText = arrayListOf<String>(
-//            "Комбо",
-//            "Закуски",
-//            "Напитки",
-//            "Пицца",
-//            "Десерты",
-//            "Соусы",
-//            "Другие товары"
-//        )
-//        return listButtonText
-//    }
-
-    private fun updateFoodList(id: Int) {
-        //TODO: something
     }
 }
