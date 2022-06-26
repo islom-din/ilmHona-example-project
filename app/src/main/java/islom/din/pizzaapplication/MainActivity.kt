@@ -21,20 +21,17 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    private var _activityItemBinding: ActivityItemBinding? = null
-    private val activityItemBinding get() = _activityItemBinding
-
     // ViewModel для данной активити
     private lateinit var viewModel: MainViewModel
 
-    // RecyclerView для списка категорий
-    private lateinit var categoriesList: RecyclerView
     private val categoriesAdapter = FoodCategoryAdapter()
     private val foodAdapter = FoodAdapter()
     private var chooseCityBottomSheet: BottomSheetDialog? = null
     private var aboutBannerBottomSheet: BottomSheetDialog? = null
-//    private lateinit var foods: RecyclerView
 
+    /** --------------------------------------------------------------------------------------------
+     *  lifecycle
+     * -------------------------------------------------------------------------------------------*/
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,13 +39,15 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
         binding.foodsListRv.adapter = foodAdapter
-
-
+        binding.categoriesList.adapter = categoriesAdapter
 
         setupListeners()
         setupCategoriesList()
+        /**
+         * Изначально выбрать список по умолчанию
+         * по категории 1 - комбо
+         */
         setupFoodList(1)
 
 
@@ -56,10 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         setupCityBottomSheet()
         setupBannerBottomSheet()
-
-
         binding.cityName.text = "Душанбе"
-
         binding.text1.setOnClickListener {
             binding.text2.setBackgroundResource(R.color.darkGray)
             binding.address2.visibility = View.INVISIBLE
@@ -84,6 +80,10 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
 
+    /** --------------------------------------------------------------------------------------------
+     *  private
+     * -------------------------------------------------------------------------------------------*/
+
     private fun setupListeners() {
         categoriesAdapter.onItemClick = { refreshCategoriesList(it) }
         foodAdapter.onItemClick = {
@@ -97,10 +97,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupCategoriesList() {
-        categoriesList = findViewById(R.id.categories_list)
         val categories = viewModel.categories
         categoriesAdapter.submitList(categories)
-        categoriesList.adapter = categoriesAdapter
     }
 
     private fun refreshCategoriesList(selectedCategoryId: Int) {
