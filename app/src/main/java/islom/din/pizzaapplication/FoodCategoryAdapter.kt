@@ -16,10 +16,10 @@ class FoodCategoryAdapter : RecyclerView.Adapter<FoodCategoryAdapter.ButtonViewH
     * --------------------------------------------*/
 
     var onItemClick: ((Int) -> Unit)? = null
-    private var listButton: List<FoodCategory> = emptyList()
+    private var categories: List<FoodCategory> = emptyList()
 
     fun submitList(newList: List<FoodCategory>) {
-        listButton = newList
+        categories = newList
         notifyDataSetChanged() // это тяжело
     }
 
@@ -35,9 +35,9 @@ class FoodCategoryAdapter : RecyclerView.Adapter<FoodCategoryAdapter.ButtonViewH
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ButtonViewHolder, position: Int) {
-        holder.button.text = listButton[position].name
+        holder.button.text = categories[position].name
 
-        if (listButton[position].isSelected) {
+        if (categories[position].isSelected) {
             holder.button.setBackgroundResource(R.drawable.button_click_active_design)
             holder.button.setTextColor(
                 holder.itemView.resources.getColor(
@@ -58,7 +58,7 @@ class FoodCategoryAdapter : RecyclerView.Adapter<FoodCategoryAdapter.ButtonViewH
     }
 
     override fun getItemCount(): Int {
-        return listButton.size
+        return categories.size
     }
 
     /* --------------------------------------------
@@ -70,7 +70,7 @@ class FoodCategoryAdapter : RecyclerView.Adapter<FoodCategoryAdapter.ButtonViewH
 
         init {
             view.setOnClickListener {
-                onItemClick?.invoke(listButton[adapterPosition].id)
+                onItemClick?.invoke(categories[adapterPosition].id)
             }
         }
     }

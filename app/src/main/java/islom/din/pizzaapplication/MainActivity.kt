@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     // ViewModel для данной активити
     private lateinit var viewModel: MainViewModel
 
-    private val categoriesAdapter = FoodCategoryAdapter()
+    private val categoriesAdapter = FoodCategoryAdapter2()
     private val foodAdapter = FoodAdapter()
     private var chooseCityBottomSheet: BottomSheetDialog? = null
     private var aboutBannerBottomSheet: BottomSheetDialog? = null
