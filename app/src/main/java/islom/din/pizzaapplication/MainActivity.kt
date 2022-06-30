@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lesson2.FoodCategory
 import com.example.lesson2.FoodCategoryAdapter
 import com.example.recyclerview_itemclick.DataSource
 import com.example.recyclerview_itemclick.FoodAdapter
@@ -24,8 +26,11 @@ class MainActivity : AppCompatActivity() {
     // ViewModel для данной активити
     private lateinit var viewModel: MainViewModel
 
+    // Адаптеры для списков
     private val categoriesAdapter = FoodCategoryAdapter2()
     private val foodAdapter = FoodAdapter()
+
+    // Bottom sheets
     private var chooseCityBottomSheet: BottomSheetDialog? = null
     private var aboutBannerBottomSheet: BottomSheetDialog? = null
 
@@ -39,19 +44,12 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        binding.foodsListRv.itemAnimator = null
         binding.foodsListRv.adapter = foodAdapter
         binding.categoriesList.adapter = categoriesAdapter
 
         setupListeners()
         setupCategoriesList()
-        /**
-         * Изначально выбрать список по умолчанию
-         * по категории 1 - комбо
-         */
-        setupFoodList(1)
-
-
-
 
         setupCityBottomSheet()
         setupBannerBottomSheet()
@@ -72,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         binding.cityName.setOnClickListener {
             chooseCityBottomSheet?.show()
         }
-
     }
 
     override fun onDestroy() {
@@ -85,7 +82,7 @@ class MainActivity : AppCompatActivity() {
      * -------------------------------------------------------------------------------------------*/
 
     private fun setupListeners() {
-        categoriesAdapter.onItemClick = { refreshCategoriesList(it) }
+        categoriesAdapter.onItemClick = { setupCategoriesList(it) }
         foodAdapter.onItemClick = {
             val intent = Intent(this@MainActivity, ItemActivity::class.java)
             intent.putExtra("NAME", it.name)
@@ -96,18 +93,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupCategoriesList() {
-        val categories = viewModel.categories
-        categoriesAdapter.submitList(categories)
-    }
-
-    private fun refreshCategoriesList(selectedCategoryId: Int) {
-        val currentCategories = viewModel.categories
-        for (item in currentCategories) {
-            item.isSelected = item.id == selectedCategoryId
-        }
-        viewModel.updateCategories(currentCategories)
-        categoriesAdapter.submitList(currentCategories)
+    private fun setupCategoriesList(selectedCategoryId: Int = 1) {
+        categoriesAdapter.submitList(
+            viewModel.getUpdatedCategories(selectedCategoryId)
+        )
         setupFoodList(selectedCategoryId)
     }
 

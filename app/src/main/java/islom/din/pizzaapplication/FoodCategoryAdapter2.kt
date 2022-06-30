@@ -38,7 +38,7 @@ class FoodCategoryAdapter2 : ListAdapter<FoodCategory, FoodCategoryAdapter2.Butt
             oldItem: FoodCategory,
             newItem: FoodCategory
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.isSelected == newItem.isSelected
         }
     }
 
