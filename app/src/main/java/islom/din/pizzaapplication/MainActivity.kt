@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lesson2.FoodCategory
 import com.example.lesson2.FoodCategoryAdapter
@@ -17,6 +18,8 @@ import com.example.recyclerview_itemclick.FoodAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import islom.din.pizzaapplication.databinding.ActivityItemBinding
 import islom.din.pizzaapplication.databinding.ActivityMainBinding
+import kotlinx.coroutines.*
+import kotlin.concurrent.thread
 
 // VIEW
 class MainActivity : AppCompatActivity() {
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private var chooseCityBottomSheet: BottomSheetDialog? = null
     private var aboutBannerBottomSheet: BottomSheetDialog? = null
 
+
     /** --------------------------------------------------------------------------------------------
      *  lifecycle
      * -------------------------------------------------------------------------------------------*/
@@ -43,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         binding.foodsListRv.itemAnimator = null
         binding.foodsListRv.adapter = foodAdapter
@@ -82,7 +88,22 @@ class MainActivity : AppCompatActivity() {
      * -------------------------------------------------------------------------------------------*/
 
     private fun setupListeners() {
-        categoriesAdapter.onItemClick = { setupCategoriesList(it) }
+        categoriesAdapter.onItemClick = {
+            lifecycleScope.launch(Dispatchers.IO) {
+                // показать default-ную картинку
+                var i = 0
+                while(i < 100) {
+                    delay(1000)
+                    Log.d("coroutine_tag", "setupListeners: $i")
+                    i++
+                }
+                //!!!!!
+                withContext(Dispatchers.Main) {
+                    binding.foodsListRv
+                }
+            }
+            setupCategoriesList(it)
+        }
         foodAdapter.onItemClick = {
             val intent = Intent(this@MainActivity, ItemActivity::class.java)
             intent.putExtra("NAME", it.name)

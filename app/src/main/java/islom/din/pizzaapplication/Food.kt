@@ -10,3 +10,9 @@ data class Food( //some pizza
     val additionalComponents: List<Food>? = null//TODO: список всех элементов из которых состоит
     // some pizza2, some pizza3, ...
 )
+
+
+class Pizza(
+    val id: Int,
+    val name: String
+)
